@@ -1,0 +1,24 @@
+{
+  "name": "axe-hash-router",
+  "version": "1.0.0",
+  "description": "This is a hash router for vanilla JavaScript for SPA.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whoiseon/axe-hash-router.git"
+  },
+  "author": "whoiseon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/whoiseon/axe-hash-router/issues"
+  },
+  "homepage": "https://github.com/whoiseon/axe-hash-router#readme",
+  "dependencies": {
+    "@types/node": "^20.3.1",
+    "ts-loader": "^9.4.3",
+    "typescript": "^5.1.3"
+  }
+}

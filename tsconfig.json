@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "outDir": "./dist/",
+        "noImplicitAny": true,
+        "module": "esnext",
+        "target": "es6",
+        "lib": [ "es6", "dom" ],
+        "allowJs": true,
+        "moduleResolution": "node",
+        "paths": {
+            "@/*": [ "src/*" ]
+        },
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+
+}
