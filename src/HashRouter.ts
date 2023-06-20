@@ -9,23 +9,17 @@ export default class HashRouter
   /** 현재 사용자가 보고있는 라우트 */
   public current: Match | null = null;
 
-  constructor(appRoute?: string)
+  private loadEventOption: boolean;
+
+  constructor(loadEvent?: boolean)
   {
-    /** 기본 라우트 설정을 입력하지 않으면
-     * "/" 라우트로 설정
-     */
-    if (!appRoute)
+    if (loadEvent === undefined)
     {
-      console.warn(
-        '기본 라우트가 설정되지 않았습니다. "/" 라우트로 설정합니다.',
-      );
-      this.root = '/';
-    } else
+      this.loadEventOption = true;
+    }
+    else
     {
-      /** 기본 라우트 설정을 입력했다면
-       * 앞 뒤 슬래시를 제거해주고 this.root에 할당한다.
-       */
-      this.root = appRoute;
+      this.loadEventOption = loadEvent;
     }
 
     /** 라우트 배열을 초기화 한다. */
@@ -111,6 +105,14 @@ export default class HashRouter
   }
 
   /**
+   * 현재 라우트를 새로고침하는 메서드
+   */
+  public refresh(): void
+  {
+    this.routeManager();
+  }
+
+  /**
    * 라우트를 해석하고 매칭되는 라우트가 있으면
    * 해당 라우트의 핸들러를 실행한다.
    * 그 과정에서 매칭된 라우트의 파라미터를 추출해서
@@ -134,7 +136,7 @@ export default class HashRouter
       asPath: path,
       queryString,
       params: new Map<string, string>(),
-      query: query ? new URLSearchParams(query) : null,
+      query: new URLSearchParams(query),
     };
 
     /** 라우트를 순회하면서 현재 라우트와
