@@ -1,7 +1,7 @@
 {
-  "name": "axe-hash-router",
+  "name": "jxta-hash-router",
   "version": "1.0.0",
-  "description": "This is a hash router for vanilla JavaScript for SPA.",
+  "description": "This jxta-hash-router is a hash router for vanilla JavaScript for SPA.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --hot",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/whoiseon/axe-hash-router.git"
+    "url": "git+https://github.com/whoiseon/jxta-hash-router.git"
   },
   "author": "whoiseon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/whoiseon/axe-hash-router/issues"
+    "url": "https://github.com/whoiseon/jxta-hash-router/issues"
   },
-  "homepage": "https://github.com/whoiseon/axe-hash-router#readme",
+  "homepage": "https://github.com/whoiseon/jxta-hash-router#readme",
   "devDependencies": {
     "@types/node": "^20.3.1",
     "clean-webpack-plugin": "^4.0.0",
