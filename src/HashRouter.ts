@@ -1,6 +1,7 @@
 import { Match, Routes, Handler } from './types/types';
 
-export default class HashRouter {
+export default class HashRouter
+{
   /** 기본 라우트 */
   private root: string;
   /** 등록된 라우트 배열 */
@@ -8,16 +9,19 @@ export default class HashRouter {
   /** 현재 사용자가 보고있는 라우트 */
   public current: Match | null = null;
 
-  constructor(appRoute?: string) {
+  constructor(appRoute?: string)
+  {
     /** 기본 라우트 설정을 입력하지 않으면
      * "/" 라우트로 설정
      */
-    if (!appRoute) {
+    if (!appRoute)
+    {
       console.warn(
         '기본 라우트가 설정되지 않았습니다. "/" 라우트로 설정합니다.',
       );
       this.root = '/';
-    } else {
+    } else
+    {
       /** 기본 라우트 설정을 입력했다면
        * 앞 뒤 슬래시를 제거해주고 this.root에 할당한다.
        */
@@ -34,8 +38,22 @@ export default class HashRouter {
    * @param {Handler} handler 라우트 핸들러
    * @returns {HashRouter} HashRouter 인스턴스
    */
-  public on(path: string | RegExp, handler: Handler): HashRouter {
+  public on(path: string | RegExp, handler: Handler): HashRouter
+  {
     this.routes.set(path.toString(), handler);
+
+    /** 체인 형식으로 메서드를 연결해서 사용하기 위해서 인스턴스를 리턴한다. */
+    return this;
+  }
+
+  /**
+   * 404 페이지를 등록하는 메서드
+   * @param {Handler} handler 라우트 핸들러
+   * @returns {HashRouter}
+   */
+  public notFound(handler: Handler): HashRouter
+  {
+    this.on('*', handler);
 
     /** 체인 형식으로 메서드를 연결해서 사용하기 위해서 인스턴스를 리턴한다. */
     return this;
@@ -46,7 +64,8 @@ export default class HashRouter {
    * @param {string | RegExp} path 라우트 경로
    * @returns {void}
    */
-  public off(path: string | RegExp): void {
+  public off(path: string | RegExp): void
+  {
     this.routes.delete(path.toString());
   }
 
@@ -54,38 +73,41 @@ export default class HashRouter {
    * 라우트를 해석하는 메서드
    * @returns {void}
    */
-  public resolve(): void {
+  public resolve(): void
+  {
     /** DOMContentLoaded (페이지 로드 시) 이벤트가 발생하면 라우트를 해석한다. */
-    window.addEventListener('DOMContentLoaded', (): void => {
+    window.addEventListener('DOMContentLoaded', (): void =>
+    {
       console.log('DOMContentLoaded');
       this.routeManager();
     });
 
     /** hashchange (해시값 변경 시) 이벤트가 발생하면 라우트를 해석한다. */
-    window.addEventListener('hashchange', (): void => {
+    window.addEventListener('hashchange', (): void =>
+    {
       console.log('hashchange');
       this.routeManager();
     });
   }
 
   /**
-   * 404 페이지를 등록하는 메서드
-   * @param {Handler} handler 라우트 핸들러
-   * @returns {HashRouter}
-   */
-  public notFound(handler: Handler): HashRouter {
-    this.on('*', handler);
-
-    /** 체인 형식으로 메서드를 연결해서 사용하기 위해서 인스턴스를 리턴한다. */
-    return this;
-  }
-
-  /**
    * hash 값을 변경하는 메서드 (이동)
    * @param {string} path 이동할 경로
    */
-  public navigate(path: string): void {
+  public navigate(path: string): void
+  {
     window.location.hash = path;
+  }
+
+  /**
+   * 현재 주소창의 url을 변경해주는 함수이다.
+   * redirect와는 다른 개념으로 url만 변경하고 화면은 다시 그리지 않는다.
+   * @param {string} url
+   * @returns {void}
+   */
+  public rewrite(url: string): void
+  {
+    window.location.hash = `#${url}`;
   }
 
   /**
@@ -95,7 +117,8 @@ export default class HashRouter {
    * match 객체에 할당한다.
    * @returns {void}
    */
-  private routeManager(): void {
+  private routeManager(): void
+  {
     /** 현재 주소 */
     const currentPath = this.getPath;
     /** 쿼리스트링을 가져오기 위해서 '?'를 기준으로 path와 query로 나눈다. */
@@ -117,12 +140,14 @@ export default class HashRouter {
     /** 라우트를 순회하면서 현재 라우트와
      * 매칭되는 라우트가 있는지 확인한다.
      */
-    for (const [regexPath, handler] of this.routes) {
+    for (const [regexPath, handler] of this.routes)
+    {
       /** 매칭된 라우터를 가져오는 변수 */
       const matchResult = path.match(this.pathToRegex(regexPath).regex);
 
       /** 매칭된 라우터가 있으면 */
-      if (matchResult) {
+      if (matchResult)
+      {
         /** 매칭된 라우터의 파라미터를 추출해서 match 객체에 할당한다. */
         const params = this.extractParams(
           this.pathToRegex(regexPath).paramNames,
@@ -145,10 +170,12 @@ export default class HashRouter {
    * 페이지 접속 시 해쉬 값이 없으면 기본 라우트로 설정한다.
    * @returns {void}
    */
-  private initRoute(): void {
+  private initRoute(): void
+  {
     this.routes = new Map();
 
-    if (window.location.hash === '') {
+    if (window.location.hash === '')
+    {
       window.location.hash = this.root;
     }
   }
@@ -157,7 +184,8 @@ export default class HashRouter {
    * 현재 해쉬 값(주소)을 가져오는 메서드
    * @returns {string}
    */
-  private get getPath(): string {
+  private get getPath(): string
+  {
     return window.location.hash.substring(1);
   }
 
@@ -166,7 +194,8 @@ export default class HashRouter {
    * @param { string } path
    * @returns { regex: RegExp; paramNames: string[] }
    */
-  private pathToRegex(path: string): { regex: RegExp; paramNames: string[] } {
+  private pathToRegex(path: string): { regex: RegExp; paramNames: string[]; }
+  {
     /**
      * URL 경로에서 파라미터 패턴을 찾기 위한 정규식
      * ex) /about/:userId
@@ -185,7 +214,8 @@ export default class HashRouter {
      * 정규식으로 대체한다.
      * @returns { '([^/]+)' }
      */
-    let escapedPath = path.replace(paramRegex, (match) => {
+    let escapedPath = path.replace(paramRegex, (match) =>
+    {
       const paramName = match.slice(1);
       paramNames.push(paramName);
       return '([^/]+)';
@@ -220,14 +250,16 @@ export default class HashRouter {
   private extractParams(
     paramNames: string[],
     matchResult: RegExpMatchArray,
-  ): Map<string, string> {
+  ): Map<string, string>
+  {
     const params = new Map<string, string>();
 
     // `paramNames` 배열과 `matchResult`를 사용하여 URL 경로에서 추출한 파라미터들을 `params` 맵에 저장한다.
     // `paramNames` 배열은 URL 경로에서 발견된 파라미터 이름들을 담고 있으며,
     // `matchResult`는 URL 경로와 일치하는 정규식 매치 결과이다.
     // 각 파라미터 이름과 매치 결과의 값을 `params` 맵에 등록한다.
-    for (let i = 0; i < paramNames.length; i++) {
+    for (let i = 0; i < paramNames.length; i++)
+    {
       const paramName = paramNames[i];
       const paramValue = matchResult[i + 1];
       params.set(paramName, paramValue);
