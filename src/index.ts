@@ -10,7 +10,7 @@ export default class StartUp
 
   constructor()
   {
-    this.router = new Router('/');
+    this.router = new Router(true);
     this.configureRouter();
   }
 
