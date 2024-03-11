@@ -1,4 +1,4 @@
-import Router from './HashRouter';
+import Router from './JxtaHashRoute';
 import Home from './components/Home';
 import About from './components/About';
 import MyPage from './components/MyPage';
@@ -8,7 +8,7 @@ export default class StartUp {
     private router: Router;
 
     constructor() {
-        this.router = new Router(true);
+        this.router = new Router();
         this.configureRouter();
     }
 
