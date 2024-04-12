@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
                 // TypeScript 로더 설정
                 {
                     test: /\.ts?$/i,
-                    exclude: /node_modules|src\/components/,
+                    exclude: /node_modules/,
                     use: ['ts-loader'],
                 },
             ],

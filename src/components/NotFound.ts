@@ -1,19 +1,19 @@
 export default class NotFound {
-  constructor(props?: any) {
-    const root = document.getElementById('root');
+    constructor(props?: any) {
+        const root = document.getElementById('root');
 
-    if (root) {
-      root.innerHTML = '';
-      root.innerHTML = this.render();
+        if (root) {
+            root.innerHTML = '';
+            root.innerHTML = this.render();
+        }
+
+        if (props) {
+            console.log(props);
+        }
     }
 
-    if (props) {
-      console.log(props);
-    }
-  }
-
-  public render(): string {
-    return `
+    public render(): string {
+        return `
           <div>
               <h1>404 - Error</h1>
               <p>페이지를 찾을 수 없습니다.</p>
@@ -26,5 +26,5 @@ export default class NotFound {
           </div>
           </div>
       `;
-  }
+    }
 }

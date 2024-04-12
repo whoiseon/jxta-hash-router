@@ -1,19 +1,19 @@
 export default class MyPage {
-  constructor(props?: any) {
-    const root = document.getElementById('root');
+    constructor(props?: any) {
+        const root = document.getElementById('root');
 
-    if (root) {
-      root.innerHTML = '';
-      root.innerHTML = this.render();
+        if (root) {
+            root.innerHTML = '';
+            root.innerHTML = this.render();
+        }
+
+        if (props) {
+            console.log(props);
+        }
     }
 
-    if (props) {
-      console.log(props);
-    }
-  }
-
-  public render(): string {
-    return `
+    public render(): string {
+        return `
         <div>
             <h1>MyPage</h1>
             <div>
@@ -25,5 +25,5 @@ export default class MyPage {
             </div>
         </div>
     `;
-  }
+    }
 }

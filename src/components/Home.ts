@@ -1,14 +1,14 @@
 export default class Home {
-  constructor() {
-    const root = document.getElementById('root');
-    if (root) {
-      root.innerHTML = '';
-      root.innerHTML = this.render();
+    constructor() {
+        const root = document.getElementById('root');
+        if (root) {
+            root.innerHTML = '';
+            root.innerHTML = this.render();
+        }
     }
-  }
 
-  public render(): string {
-    return `
+    public render(): string {
+        return `
         <div>
             <h1>Home</h1>
             <div>
@@ -20,5 +20,5 @@ export default class Home {
             </div>
         </div>
     `;
-  }
+    }
 }
